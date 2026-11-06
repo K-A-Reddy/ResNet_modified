@@ -16,7 +16,7 @@ def main():
     counter=0
     for epoch in range(epochs):
         counter+=1
-        if counter=91:
+        if counter==91:
             counter=0
             learing_rate=learning_rate*0.1
             optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate,momentum=0.9,weight_decay=0.0001)
