@@ -5,7 +5,7 @@ from dataset import get_dataloaders
 from train import train_one_epoch
 from evaluate import evaluate
 def main():
-    device = torch.device("cuda" if torch.backends.mps.is_available() else "cpu")
+    device = torch.device("cuda" if torch.backends.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     train_loader, test_loader = get_dataloaders(batch_size=128)
     model = ResNCIF18(num_classes=10).to(device)
