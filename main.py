@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from models.resnet18 import ResNet18
+from models.resnet18 import ResNCIF18
 from dataset import get_dataloaders
 from train import train_one_epoch
 from evaluate import evaluate
@@ -8,7 +8,7 @@ def main():
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     print(f"Using device: {device}")
     train_loader, test_loader = get_dataloaders(batch_size=32)
-    model = ResNet18(num_classes=10).to(device)
+    model = ResNCIF18(num_classes=10).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(),lr=0.1,momentum=0.9,weight_decay=5e-4)
     epochs = 20
