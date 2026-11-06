@@ -7,12 +7,19 @@ from evaluate import evaluate
 def main():
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     print(f"Using device: {device}")
-    train_loader, test_loader = get_dataloaders(batch_size=32)
+    train_loader, test_loader = get_dataloaders(batch_size=128)
     model = ResNCIF18(num_classes=10).to(device)
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.SGD(model.parameters(),lr=0.1,momentum=0.9,weight_decay=5e-4)
-    epochs = 20
+    learning_rate=0.1
+    optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate,momentum=0.9,weight_decay=0.0001)
+    epochs = 164
+    counter=0
     for epoch in range(epochs):
+        counter+=1
+        if counter=91:
+            counter=0
+            learing_rate=learning_rate*0.1
+            optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate,momentum=0.9,weight_decay=0.0001)
         train_loss, train_accuracy = train_one_epoch(model, train_loader, criterion, optimizer, device)
         test_loss, test_accuracy = evaluate(model, test_loader, criterion, device)
         print(
