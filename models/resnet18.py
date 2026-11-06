@@ -18,21 +18,21 @@ class ResNCIF18(nn.Module):
         self.fc=nn.Linear(64,num_classes)
 
     def forward(self, x):
-    x = self.conv1(x)
-    # Stage 1: 32x32, 16 channels
-    x = self.conv1_block(x)
-    x = self.conv2_block(x)
-    x = self.conv3_block(x)
-    # Stage 2: 16x16, 32 channels
-    x = self.downsample1(x)
-    x = self.conv4_block(x)
-    x = self.conv5_block(x)
-    # Stage 3: 8x8, 64 channels
-    x = self.downsample2(x)
-    x = self.conv6_block(x)
-    x = self.conv7_block(x)
-    # Classification
-    x = self.avgpool(x)
-    x = torch.flatten(x, 1)
-    x = self.fc(x)
-    return x
+        x = self.conv1(x)
+        # Stage 1: 32x32, 16 channels
+        x = self.conv1_block(x)
+        x = self.conv2_block(x)
+        x = self.conv3_block(x)
+        # Stage 2: 16x16, 32 channels
+        x = self.downsample1(x)
+        x = self.conv4_block(x)
+        x = self.conv5_block(x)
+        # Stage 3: 8x8, 64 channels
+        x = self.downsample2(x)
+        x = self.conv6_block(x)
+        x = self.conv7_block(x)
+        # Classification
+        x = self.avgpool(x)
+        x = torch.flatten(x, 1)
+        x = self.fc(x)
+        return x
