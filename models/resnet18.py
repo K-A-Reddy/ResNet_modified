@@ -16,7 +16,6 @@ class ResNCIF18(nn.Module):
         self.conv7_block=ConvResidualBlock(64)
         self.avgpool=nn.AdaptiveAvgPool2d((1, 1))
         self.fc=nn.Linear(64,num_classes)
-
     def forward(self, x):
         x = self.conv1(x)
         # Stage 1: 32x32, 16 channels
